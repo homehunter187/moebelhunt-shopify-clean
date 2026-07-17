@@ -1,0 +1,54 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-trust page-width" style="--mh-trust-bg: {{ section.settings.background_color }}; --mh-trust-fg: {{ section.settings.text_color }};">
+  <div class="mh-trust__grid">
+    {%- for block in section.blocks -%}
+      <div class="mh-trust__item" {{ block.shopify_attributes }}>
+        {%- if block.settings.icon != blank -%}
+          <div class="mh-trust__icon">{{ block.settings.icon | image_url: width: 96 | image_tag: loading: 'lazy', alt: block.settings.title }}</div>
+        {%- endif -%}
+        <div class="mh-trust__text">
+          <p class="mh-trust__title">{{ block.settings.title }}</p>
+          {%- if block.settings.subtitle != blank -%}
+            <p class="mh-trust__subtitle">{{ block.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Premium Trust Bar",
+  "tag": "section",
+  "class": "mh-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "Hintergrund", "default": "#fffdf9" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1f1a17" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "USP",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Premium Qualitaet" },
+        { "type": "text", "id": "subtitle", "label": "Untertitel", "default": "Aus dem Hause Inhofer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium Trust Bar",
+      "blocks": [
+        { "type": "item", "settings": { "title": "Premium Qualitaet", "subtitle": "Aus dem Hause Inhofer" } },
+        { "type": "item", "settings": { "title": "Persoenliche Beratung", "subtitle": "Individuelle Wohnkonzepte" } },
+        { "type": "item", "settings": { "title": "Lieferung & Montage", "subtitle": "Auf Wunsch bundesweit" } },
+        { "type": "item", "settings": { "title": "Sicher einkaufen", "subtitle": "Geschuetzter Checkout" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

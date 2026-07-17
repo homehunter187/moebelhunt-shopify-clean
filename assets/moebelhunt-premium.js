@@ -1,17 +1,9 @@
 document.documentElement.classList.add('mh-premium-ready');
-
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('header-component');
-  if (!header) return;
-
-  const toggleScrolled = () => {
-    if (window.scrollY > 24) {
-      header.classList.add('mh-is-scrolled');
-    } else {
-      header.classList.remove('mh-is-scrolled');
-    }
-  };
-
-  toggleScrolled();
-  window.addEventListener('scroll', toggleScrolled, { passive: true });
+document.addEventListener('DOMContentLoaded',function(){
+  var cards=document.querySelectorAll('.mh-catcard, .mh-editorial');
+  if(!('IntersectionObserver'in window)||!cards.length)return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('mh-in-view');io.unobserve(e.target);}});
+  },{threshold:.12});
+  cards.forEach(function(c){io.observe(c);});
 });

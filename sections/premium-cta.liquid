@@ -1,0 +1,28 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-cta page-width" style="--mh-cta-bg: {{ section.settings.background_color }}; --mh-cta-fg: {{ section.settings.text_color }};">
+  <div class="mh-cta__inner">
+    {%- if section.settings.heading != blank -%}<h2 class="mh-cta__title">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<p class="mh-cta__text">{{ section.settings.text }}</p>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link | default: '#' }}" class="mh-btn mh-btn--light">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Premium CTA",
+  "tag": "section",
+  "class": "mh-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Bereit fuer Ihr neues Zuhause?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Lassen Sie sich persoenlich beraten und finden Sie die passenden Moebel fuer Ihren Stil." },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Jetzt Beratung anfragen" },
+    { "type": "url", "id": "button_link", "label": "Button-Link" },
+    { "type": "color", "id": "background_color", "label": "Hintergrund", "default": "#201813" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#f5ede5" }
+  ],
+  "presets": [{ "name": "Premium CTA" }]
+}
+{% endschema %}

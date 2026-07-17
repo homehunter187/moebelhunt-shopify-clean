@@ -1,0 +1,77 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="mh-hero mh-hero--{{ section.settings.height }}"
+  style="--mh-hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+>
+  {%- if section.settings.image != blank -%}
+    <div class="mh-hero__media">
+      {{ section.settings.image | image_url: width: 3000 | image_tag:
+        loading: 'eager',
+        fetchpriority: 'high',
+        widths: '600, 900, 1200, 1800, 2400, 3000',
+        sizes: '100vw',
+        alt: section.settings.image.alt | default: section.settings.heading
+      }}
+    </div>
+  {%- else -%}
+    <div class="mh-hero__media mh-hero__media--placeholder"></div>
+  {%- endif -%}
+
+  <div class="mh-hero__overlay"></div>
+
+  <div class="mh-hero__inner mh-hero__inner--{{ section.settings.content_position }}">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="mh-eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h1 class="mh-hero__heading">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="mh-hero__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+    <div class="mh-hero__actions">
+      {%- if section.settings.primary_label != blank -%}
+        <a href="{{ section.settings.primary_link | default: '#' }}" class="mh-btn mh-btn--primary">{{ section.settings.primary_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.secondary_label != blank -%}
+        <a href="{{ section.settings.secondary_link | default: '#' }}" class="mh-btn mh-btn--ghost">{{ section.settings.secondary_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Premium Hero",
+  "tag": "section",
+  "class": "mh-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Premium Wohnen mit Charakter" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Moebelhunt by Inhofer" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Entdecken Sie kuratierte Sofas, Esstische, Betten und Design-Highlights fuer ein Zuhause mit echter Wohnqualitaet." },
+    { "type": "image_picker", "id": "image", "label": "Hintergrundbild" },
+    {
+      "type": "select", "id": "height", "label": "Hoehe", "default": "large",
+      "options": [
+        { "value": "medium", "label": "Mittel" },
+        { "value": "large", "label": "Gross" },
+        { "value": "full", "label": "Vollbild" }
+      ]
+    },
+    {
+      "type": "select", "id": "content_position", "label": "Inhaltsposition", "default": "left",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Mitte" }
+      ]
+    },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay-Deckkraft", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 40 },
+    { "type": "text", "id": "primary_label", "label": "Primaerer Button", "default": "Kollektion entdecken" },
+    { "type": "url", "id": "primary_link", "label": "Primaerer Link" },
+    { "type": "text", "id": "secondary_label", "label": "Sekundaerer Button", "default": "Beratung anfragen" },
+    { "type": "url", "id": "secondary_link", "label": "Sekundaerer Link" }
+  ],
+  "presets": [{ "name": "Premium Hero" }]
+}
+{% endschema %}

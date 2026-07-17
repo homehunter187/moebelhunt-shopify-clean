@@ -1,0 +1,54 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-footer" style="--mh-footer-bg: {{ section.settings.background_color }}; --mh-footer-fg: {{ section.settings.text_color }};">
+  <div class="page-width mh-footer__grid">
+    <div class="mh-footer__brand">
+      {%- if section.settings.heading != blank -%}<p class="mh-footer__title">{{ section.settings.heading }}</p>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="rte mh-footer__text">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+    {%- for block in section.blocks -%}
+      <div class="mh-footer__col" {{ block.shopify_attributes }}>
+        {%- if block.settings.title != blank -%}<p class="mh-footer__col-title">{{ block.settings.title }}</p>{%- endif -%}
+        {%- if block.settings.body != blank -%}<div class="rte mh-footer__col-body">{{ block.settings.body }}</div>{%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+  <div class="page-width mh-footer__bottom">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Premium Footer Content",
+  "tag": "section",
+  "class": "mh-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Marke", "default": "Moebelhunt by Inhofer" },
+    { "type": "richtext", "id": "text", "label": "Beschreibung", "default": "<p>Premium-Interior, kuratiert fuer anspruchsvolle Wohnkonzepte.</p>" },
+    { "type": "color", "id": "background_color", "label": "Hintergrund", "default": "#201813" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#f5ede5" }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Spalte",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Service" },
+        { "type": "richtext", "id": "body", "label": "Inhalt", "default": "<p>Beratung<br>Lieferung<br>Kontakt</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium Footer Content",
+      "blocks": [
+        { "type": "column", "settings": { "title": "Service", "body": "<p>Beratung<br>Lieferung & Montage<br>Kontakt</p>" } },
+        { "type": "column", "settings": { "title": "Shop", "body": "<p>Sofas<br>Esstische<br>Betten</p>" } },
+        { "type": "column", "settings": { "title": "Rechtliches", "body": "<p>Impressum<br>Datenschutz<br>AGB</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

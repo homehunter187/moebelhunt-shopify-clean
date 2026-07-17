@@ -1,0 +1,59 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-catgrid page-width">
+  <div class="mh-section-head">
+    {%- if section.settings.eyebrow != blank -%}<p class="mh-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="mh-section-head__title">{{ section.settings.heading }}</h2>{%- endif -%}
+  </div>
+
+  <div class="mh-catgrid__grid mh-catgrid__grid--cols-{{ section.settings.columns }}">
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link | default: '#' }}" class="mh-catcard" {{ block.shopify_attributes }}>
+        <div class="mh-catcard__media">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 500, 700, 900', sizes: '(min-width: 750px) 25vw, 50vw', alt: block.settings.title }}
+          {%- else -%}
+            <div class="mh-catcard__placeholder"></div>
+          {%- endif -%}
+        </div>
+        <span class="mh-catcard__title">{{ block.settings.title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Premium Category Grid",
+  "tag": "section",
+  "class": "mh-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Wohnbereiche" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shoppen nach Kategorien" },
+    { "type": "range", "id": "columns", "label": "Spalten (Desktop)", "min": 2, "max": 5, "step": 1, "default": 4 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Kategorie",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Kategorie" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium Category Grid",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Sofas" } },
+        { "type": "category", "settings": { "title": "Esstische" } },
+        { "type": "category", "settings": { "title": "Betten" } },
+        { "type": "category", "settings": { "title": "Accessoires" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

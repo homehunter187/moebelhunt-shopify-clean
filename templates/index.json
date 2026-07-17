@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "premium_hero": { "type": "premium-hero", "settings": {} },
+    "premium_trust": { "type": "premium-trust-bar", "settings": {} },
+    "premium_categories": { "type": "premium-category-grid", "settings": {} },
+    "premium_editorial": { "type": "premium-editorial", "settings": {} },
+    "premium_cta": { "type": "premium-cta", "settings": {} },
+    "premium_footer_content": { "type": "premium-footer-content", "settings": {} }
+  },
+  "order": [
+    "premium_hero",
+    "premium_trust",
+    "premium_categories",
+    "premium_editorial",
+    "premium_cta",
+    "premium_footer_content"
+  ]
+}
