@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "faq": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section class='page-width mh-consulting'><div class='mh-consulting__card'><p class='mh-eyebrow'>Beratung</p><h2>Persoenliche Wohnberatung fur Ihr Projekt</h2><p>Nutzen Sie diese Seite fur Terminvereinbarung, Rueckfragen und individuelle Angebotsanfragen rund um Ihr Zuhause.</p></div></section>"
+      }
+    }
+  },
+  "order": ["main", "faq"]
+}

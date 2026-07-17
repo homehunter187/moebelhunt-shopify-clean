@@ -1,0 +1,117 @@
+:root {
+  --mh-bg: #f6f1ea;
+  --mh-surface: #fffdf9;
+  --mh-ink: #1f1a17;
+  --mh-muted: #6f655d;
+  --mh-line: rgba(31, 26, 23, 0.12);
+  --mh-accent: #7b5b3c;
+  --mh-accent-2: #b89168;
+  --mh-radius: 24px;
+  --mh-shadow: 0 20px 60px rgba(25, 18, 13, 0.12);
+  --mh-max: 1440px;
+}
+
+body {
+  background: var(--mh-bg);
+  color: var(--mh-ink);
+}
+
+.page-width,
+.section--page-width,
+.shopify-section-group-header-group,
+.shopify-section-group-footer-group {
+  max-width: var(--mh-max);
+}
+
+.button,
+button,
+.shopify-payment-button__button {
+  border-radius: 999px;
+}
+
+.mh-story,
+.mh-consulting {
+  padding: 3rem 0;
+}
+
+.mh-story__grid,
+.mh-consulting__card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,248,241,0.96));
+  border: 1px solid var(--mh-line);
+  border-radius: var(--mh-radius);
+  box-shadow: var(--mh-shadow);
+  padding: 2rem;
+}
+
+.mh-consulting__card {
+  grid-template-columns: 1fr;
+}
+
+.mh-eyebrow {
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mh-accent);
+  font-size: 0.82rem;
+}
+
+.shopify-section .hero,
+.shopify-section [class*='hero'] {
+  border-radius: 0 0 32px 32px;
+  overflow: hidden;
+}
+
+.header,
+.footer,
+.shopify-section-group-header-group,
+.shopify-section-group-footer-group {
+  background: transparent;
+}
+
+header-component.mh-is-scrolled {
+  backdrop-filter: blur(14px);
+}
+
+.card,
+.product-card,
+.collection-card,
+.article-card {
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(26, 18, 12, 0.06);
+}
+
+.product-card,
+.collection-card {
+  background: var(--mh-surface);
+  border: 1px solid rgba(31, 26, 23, 0.08);
+}
+
+.product-card:hover,
+.collection-card:hover {
+  transform: translateY(-4px);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 18px 44px rgba(26, 18, 12, 0.12);
+}
+
+.footer .footer-content,
+footer .footer,
+.footer {
+  background: #201813;
+  color: #f5ede5;
+  border-radius: 32px 32px 0 0;
+  overflow: hidden;
+}
+
+.footer a {
+  color: inherit;
+}
+
+@media (max-width: 989px) {
+  .mh-story__grid {
+    grid-template-columns: 1fr;
+  }
+}

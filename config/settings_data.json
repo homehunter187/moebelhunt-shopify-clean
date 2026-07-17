@@ -1,0 +1,11 @@
+{
+  "current": {
+    "logo_height": 42,
+    "logo_height_mobile": 32,
+    "page_width": "full",
+    "card_hover_effect": "lift",
+    "page_transition_enabled": true,
+    "transition_to_main_product": true
+  },
+  "presets": {}
+}
