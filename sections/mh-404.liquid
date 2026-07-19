@@ -1,0 +1,11 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-404 page-width">
+  <h1 class="mh-section-head__title">Seite nicht gefunden</h1>
+  <p>Die gewünschte Seite existiert nicht mehr. Entdecken Sie stattdessen unsere Kollektionen.</p>
+  <a href="{{ routes.all_products_collection_url }}" class="mh-btn mh-btn--primary">Zu den Möbeln</a>
+</section>
+
+{% schema %}
+{ "name": "MH 404", "tag": "section", "settings": [], "presets": [{ "name": "MH 404" }] }
+{% endschema %}

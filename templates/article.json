@@ -1,1 +1,4 @@
-{"sections":{"main":{"type":"main-blog-post","settings":{}}},"order":["main"]}
+{
+  "sections": { "main": { "type": "mh-article", "settings": {} } },
+  "order": ["main"]
+}

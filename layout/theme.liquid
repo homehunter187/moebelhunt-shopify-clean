@@ -3,15 +3,37 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#201813">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
     <title>{% if page_title != blank %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}</title>
+    {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
     {{ content_for_header }}
     {{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'moebelhunt-premium.js' | asset_url }}" defer></script>
   </head>
   <body class="mh-premium template-{{ template.name | handle }}">
     <a class="mh-skip-link" href="#MainContent">Zum Inhalt springen</a>
-    <main id="MainContent" role="main">
-      {{ content_for_layout }}
-    </main>
+
+    <div class="mh-topbar">
+      <div class="page-width mh-topbar__inner">
+        <span>Sichere Zahlung</span>
+        <span>Kostenloser Versand ab 490 &euro;</span>
+        <span>30 Tage R&uuml;ckgaberecht</span>
+      </div>
+    </div>
+    <div class="mh-promobar"><div class="page-width">Sommer-Sale &ndash; bis zu 20 % sparen</div></div>
+
+    {% section 'mh-header' %}
+
+    <div class="page-wrapper">
+      <main id="MainContent" role="main">
+        {{ content_for_layout }}
+      </main>
+    </div>
+
+    {% section 'mh-site-footer' %}
   </body>
 </html>

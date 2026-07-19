@@ -1,0 +1,14 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<article class="mh-article page-width">
+  <h1 class="mh-section-head__title">{{ article.title }}</h1>
+  <p class="mh-article__meta">{{ article.published_at | date: '%d.%m.%Y' }}</p>
+  {%- if article.image -%}
+    <div class="mh-article__media">{{ article.image | image_url: width: 1200 | image_tag: loading: 'eager', alt: article.title }}</div>
+  {%- endif -%}
+  <div class="rte mh-article__body">{{ article.content }}</div>
+</article>
+
+{% schema %}
+{ "name": "MH Article", "tag": "section", "settings": [], "presets": [{ "name": "MH Article" }] }
+{% endschema %}

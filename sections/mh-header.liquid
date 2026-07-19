@@ -1,0 +1,59 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<header class="mh-header" data-mh-header>
+  <div class="page-width mh-header__inner">
+    <a href="{{ routes.root_url }}" class="mh-header__logo">{{ section.settings.logo_text | default: shop.name }}</a>
+
+    <nav class="mh-header__nav" aria-label="Hauptnavigation">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'link' -%}
+          <a href="{{ block.settings.link | default: '#' }}" class="mh-header__link" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <div class="mh-header__actions">
+      <a href="{{ routes.search_url }}" aria-label="Suche" class="mh-header__action">Suche</a>
+      <a href="{{ routes.account_url }}" aria-label="Konto" class="mh-header__action">Konto</a>
+      <a href="{{ routes.cart_url }}" aria-label="Warenkorb" class="mh-header__action">Warenkorb ({{ cart.item_count }})</a>
+    </div>
+
+    <button class="mh-header__burger" aria-label="Menü" data-mh-burger>&#9776;</button>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "MH Header",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Logo-Text", "default": "Möbelhunt" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Navigationslink",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Beschriftung", "default": "Link" },
+        { "type": "url", "id": "link", "label": "Ziel" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MH Header",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Startseite" } },
+        { "type": "link", "settings": { "label": "Möbel" } },
+        { "type": "link", "settings": { "label": "Innenmöbel" } },
+        { "type": "link", "settings": { "label": "Außenmöbel" } },
+        { "type": "link", "settings": { "label": "Sommer" } },
+        { "type": "link", "settings": { "label": "Winter" } },
+        { "type": "link", "settings": { "label": "Dekoration" } },
+        { "type": "link", "settings": { "label": "Über uns" } },
+        { "type": "link", "settings": { "label": "Blog" } },
+        { "type": "link", "settings": { "label": "Häufige Fragen" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

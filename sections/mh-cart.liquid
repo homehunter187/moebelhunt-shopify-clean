@@ -1,0 +1,43 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-cart page-width">
+  <h1 class="mh-section-head__title">Warenkorb</h1>
+  {%- if cart.item_count > 0 -%}
+    {%- form 'cart', cart, class: 'mh-cart__form' -%}
+      <ul class="mh-cart__items">
+        {%- for item in cart.items -%}
+          <li class="mh-cart__item">
+            <div class="mh-cart__media">
+              {%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title }}{%- endif -%}
+            </div>
+            <div class="mh-cart__meta">
+              <a href="{{ item.url }}">{{ item.product.title }}</a>
+              <span>{{ item.final_price | money }}</span>
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Menge">
+            </div>
+            <div class="mh-cart__line">{{ item.final_line_price | money }}</div>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="mh-cart__footer">
+        <p class="mh-cart__total">Zwischensumme: {{ cart.total_price | money }}</p>
+        <div class="mh-cart__actions">
+          <button type="submit" name="update" class="mh-btn mh-btn--ghost">Aktualisieren</button>
+          <button type="submit" name="checkout" class="mh-btn mh-btn--primary">Zur Kasse</button>
+        </div>
+        <ul class="mh-product__trust">
+          <li>Sichere Zahlung</li>
+          <li>Kostenloser Versand ab 490 &euro;</li>
+          <li>30 Tage Rückgaberecht</li>
+        </ul>
+      </div>
+    {%- endform -%}
+  {%- else -%}
+    <p>Ihr Warenkorb ist leer.</p>
+    <a href="{{ routes.all_products_collection_url }}" class="mh-btn mh-btn--primary">Weiter einkaufen</a>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "MH Cart", "tag": "section", "settings": [], "presets": [{ "name": "MH Cart" }] }
+{% endschema %}

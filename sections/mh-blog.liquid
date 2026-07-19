@@ -1,0 +1,22 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-blog page-width">
+  <h1 class="mh-section-head__title">{{ blog.title | default: 'Magazin' }}</h1>
+  <div class="mh-blog__grid">
+    {%- for article in blog.articles -%}
+      <a href="{{ article.url }}" class="mh-acard">
+        <div class="mh-acard__media">
+          {%- if article.image -%}{{ article.image | image_url: width: 700 | image_tag: loading: 'lazy', alt: article.title }}{%- else -%}<div class="mh-pcard__placeholder"></div>{%- endif -%}
+        </div>
+        <span class="mh-acard__title">{{ article.title }}</span>
+        <span class="mh-acard__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</span>
+      </a>
+    {%- else -%}
+      <p>Noch keine Artikel vorhanden.</p>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "MH Blog", "tag": "section", "settings": [], "presets": [{ "name": "MH Blog" }] }
+{% endschema %}

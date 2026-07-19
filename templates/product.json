@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "mh-product", "settings": {} },
+    "info": { "type": "mh-rich-content", "settings": { "heading": "Produktdetails" } }
+  },
+  "order": ["main", "info"]
+}

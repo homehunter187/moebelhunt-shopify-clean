@@ -1,0 +1,41 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-collection page-width">
+  <div class="mh-section-head">
+    <h1 class="mh-section-head__title">{{ collection.title | default: 'Kollektion' }}</h1>
+    {%- if collection.description != blank -%}<div class="rte">{{ collection.description }}</div>{%- endif -%}
+  </div>
+
+  <div class="mh-collection__grid">
+    {%- for product in collection.products -%}
+      <a href="{{ product.url }}" class="mh-pcard">
+        <div class="mh-pcard__media">
+          {%- if product.featured_image -%}
+            {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,450,600', sizes: '(min-width:750px) 25vw, 50vw', alt: product.title }}
+          {%- else -%}
+            <div class="mh-pcard__placeholder"></div>
+          {%- endif -%}
+        </div>
+        <span class="mh-pcard__title">{{ product.title }}</span>
+        <span class="mh-pcard__price">{{ product.price | money }}</span>
+      </a>
+    {%- else -%}
+      <p>Keine Produkte in dieser Kollektion.</p>
+    {%- endfor -%}
+  </div>
+
+  {%- if paginate.pages > 1 -%}
+    <nav class="mh-pagination">{{ paginate | default_pagination }}</nav>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "MH Collection",
+  "tag": "section",
+  "settings": [
+    { "type": "range", "id": "per_page", "label": "Produkte pro Seite", "min": 8, "max": 36, "step": 4, "default": 24 }
+  ],
+  "presets": [{ "name": "MH Collection" }]
+}
+{% endschema %}

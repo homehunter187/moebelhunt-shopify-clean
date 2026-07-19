@@ -1,0 +1,48 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<footer class="mh-sitefooter">
+  <div class="page-width mh-sitefooter__grid">
+    <div class="mh-sitefooter__brand">
+      <p class="mh-sitefooter__title">{{ section.settings.brand | default: shop.name }}</p>
+      {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+    {%- for block in section.blocks -%}
+      <div class="mh-sitefooter__col" {{ block.shopify_attributes }}>
+        <p class="mh-sitefooter__col-title">{{ block.settings.title }}</p>
+        <div class="rte">{{ block.settings.body }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+  <div class="page-width mh-sitefooter__bottom">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Alle Rechte vorbehalten.</div>
+</footer>
+
+{% schema %}
+{
+  "name": "MH Footer",
+  "settings": [
+    { "type": "text", "id": "brand", "label": "Marke", "default": "Möbelhunt" },
+    { "type": "richtext", "id": "text", "label": "Beschreibung", "default": "<p>Premium-Möbel für drinnen und draußen.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Spalte",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Kundenservice" },
+        { "type": "richtext", "id": "body", "label": "Inhalt", "default": "<p>Kontakt<br>Versand<br>Rückgabe</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MH Footer",
+      "blocks": [
+        { "type": "column", "settings": { "title": "Kategorien", "body": "<p>Innenmöbel<br>Außenmöbel<br>Dekoration</p>" } },
+        { "type": "column", "settings": { "title": "Kundenservice", "body": "<p>Kontakt<br>Versand<br>Rückgabe</p>" } },
+        { "type": "column", "settings": { "title": "Unternehmen", "body": "<p>Über uns<br>Blog<br>Karriere</p>" } },
+        { "type": "column", "settings": { "title": "Rechtliches", "body": "<p>Impressum<br>Datenschutz<br>AGB</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

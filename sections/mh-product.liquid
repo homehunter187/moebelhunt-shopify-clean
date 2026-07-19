@@ -1,0 +1,58 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-product page-width">
+  <div class="mh-product__gallery">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '400,700,1000,1200', sizes: '(min-width:750px) 50vw, 100vw', alt: product.title }}
+    {%- else -%}
+      <div class="mh-product__placeholder"></div>
+    {%- endif -%}
+    {%- if product.images.size > 1 -%}
+      <div class="mh-product__thumbs">
+        {%- for image in product.images limit: 5 -%}
+          {{ image | image_url: width: 200 | image_tag: loading: 'lazy', alt: product.title }}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="mh-product__info">
+    <h1 class="mh-product__title">{{ product.title }}</h1>
+    <p class="mh-product__price">{{ product.price | money }}</p>
+    <div class="mh-product__desc rte">{{ product.description }}</div>
+
+    {%- form 'product', product, class: 'mh-product__form' -%}
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <label class="mh-product__option">
+            <span>{{ option.name }}</span>
+            <select name="options[{{ option.name | escape }}]">
+              {%- for value in option.values -%}
+                <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+              {%- endfor -%}
+            </select>
+          </label>
+        {%- endfor -%}
+      {%- endunless -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="mh-btn mh-btn--primary mh-product__atc" {% unless product.available %}disabled{% endunless %}>
+        {% if product.available %}In den Warenkorb{% else %}Ausverkauft{% endif %}
+      </button>
+    {%- endform -%}
+
+    <ul class="mh-product__trust">
+      <li>Sichere Zahlung</li>
+      <li>Kostenloser Versand ab 490 &euro;</li>
+      <li>30 Tage Rückgaberecht</li>
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MH Product",
+  "tag": "section",
+  "settings": [],
+  "presets": [{ "name": "MH Product" }]
+}
+{% endschema %}
