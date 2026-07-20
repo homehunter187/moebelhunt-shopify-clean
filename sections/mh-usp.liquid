@@ -1,0 +1,51 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-usp mh-section" style="--mh-usp-bg:{{ section.settings.background_color }};">
+  <div class="page-width">
+    <div class="mh-section-head">
+      {%- if section.settings.heading != blank -%}<h2 class="mh-section-head__title">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="mh-usp__grid">
+      {%- for block in section.blocks -%}
+        <div class="mh-usp__card" {{ block.shopify_attributes }}>
+          <p class="mh-usp__title">{{ block.settings.title }}</p>
+          <p class="mh-usp__text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MH Warum wir",
+  "tag": "section",
+  "class": "mh-section-wrap",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Ueberschrift", "default": "Warum Moebelhunt?" },
+    { "type": "color", "id": "background_color", "label": "Hintergrund", "default": "#fffdf9" }
+  ],
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Vorteil",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Premium Qualitaet" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Sorgfaeltig ausgewaehlte Materialien und Verarbeitung." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MH Warum wir",
+      "blocks": [
+        { "type": "reason", "settings": { "title": "Premium Qualitaet", "text": "Sorgfaeltig ausgewaehlte Materialien." } },
+        { "type": "reason", "settings": { "title": "Schneller Versand", "text": "Zuverlaessige Lieferung bis zu Ihnen." } },
+        { "type": "reason", "settings": { "title": "Nachhaltigkeit", "text": "Langlebige Moebel mit Verantwortung." } },
+        { "type": "reason", "settings": { "title": "Sichere Zahlung", "text": "Geschuetzter Checkout und Kaeuferschutz." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

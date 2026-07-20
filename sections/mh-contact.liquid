@@ -1,0 +1,41 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-contact mh-section">
+  <div class="page-width mh-contact__grid">
+    <div class="mh-contact__info">
+      {%- if section.settings.heading != blank -%}<h1 class="mh-contact__title">{{ section.settings.heading }}</h1>{%- endif -%}
+      {%- if section.settings.text != blank -%}<p class="mh-contact__text">{{ section.settings.text }}</p>{%- endif -%}
+      <ul class="mh-contact__meta">
+        {%- if section.settings.phone != blank -%}<li><strong>Telefon:</strong> {{ section.settings.phone }}</li>{%- endif -%}
+        {%- if section.settings.email != blank -%}<li><strong>E-Mail:</strong> {{ section.settings.email }}</li>{%- endif -%}
+        {%- if section.settings.address != blank -%}<li><strong>Adresse:</strong> {{ section.settings.address }}</li>{%- endif -%}
+      </ul>
+    </div>
+    <div class="mh-contact__formwrap">
+      {%- form 'contact', class: 'mh-contact__form' -%}
+        {%- if form.posted_successfully? -%}<p class="mh-contact__success">Vielen Dank! Ihre Nachricht wurde gesendet.</p>{%- endif -%}
+        <input type="text" name="contact[name]" placeholder="Name" required class="mh-input">
+        <input type="email" name="contact[email]" placeholder="E-Mail" required class="mh-input">
+        <input type="text" name="contact[subject]" placeholder="Betreff" class="mh-input">
+        <textarea name="contact[body]" placeholder="Ihre Nachricht" rows="6" required class="mh-input"></textarea>
+        <button type="submit" class="mh-btn mh-btn--primary">Nachricht senden</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MH Kontakt",
+  "tag": "section",
+  "class": "mh-section-wrap",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Ueberschrift", "default": "Kontakt" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Wir sind fuer Sie da. Schreiben Sie uns oder rufen Sie an." },
+    { "type": "text", "id": "phone", "label": "Telefon", "default": "+49 000 000000" },
+    { "type": "text", "id": "email", "label": "E-Mail", "default": "info@moebelhunt.de" },
+    { "type": "text", "id": "address", "label": "Adresse", "default": "Musterstrasse 1, 89000 Musterstadt" }
+  ],
+  "presets": [{ "name": "MH Kontakt" }]
+}
+{% endschema %}

@@ -1,0 +1,49 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-faq mh-section">
+  <div class="page-width mh-faq__inner">
+    <div class="mh-section-head">
+      {%- if section.settings.heading != blank -%}<h2 class="mh-section-head__title">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="mh-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="mh-faq__item" {{ block.shopify_attributes }}>
+          <summary class="mh-faq__q">{{ block.settings.question }}</summary>
+          <div class="mh-faq__a rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MH FAQ",
+  "tag": "section",
+  "class": "mh-section-wrap",
+  "max_blocks": 20,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Ueberschrift", "default": "Haeufige Fragen" }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Frage",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Frage", "default": "Wie lange dauert die Lieferung?" },
+        { "type": "richtext", "id": "answer", "label": "Antwort", "default": "<p>Die Lieferzeit betraegt in der Regel 5 bis 14 Werktage.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MH FAQ",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "Wie lange dauert die Lieferung?", "answer": "<p>In der Regel 5 bis 14 Werktage.</p>" } },
+        { "type": "qa", "settings": { "question": "Kann ich Moebel zurueckgeben?", "answer": "<p>Ja, Sie haben 30 Tage Rueckgaberecht.</p>" } },
+        { "type": "qa", "settings": { "question": "Bieten Sie Montage an?", "answer": "<p>Auf Wunsch bieten wir Lieferung inkl. Montage an.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

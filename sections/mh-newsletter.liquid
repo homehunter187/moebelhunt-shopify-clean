@@ -1,0 +1,30 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-news mh-section" style="--mh-news-bg:{{ section.settings.background_color }};--mh-news-fg:{{ section.settings.text_color }};">
+  <div class="page-width mh-news__inner">
+    {%- if section.settings.heading != blank -%}<h2 class="mh-news__title">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<p class="mh-news__text">{{ section.settings.text }}</p>{%- endif -%}
+    {%- form 'customer', class: 'mh-news__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" placeholder="{{ section.settings.placeholder }}" required class="mh-news__input">
+      <button type="submit" class="mh-btn mh-btn--primary">{{ section.settings.button_label }}</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MH Newsletter",
+  "tag": "section",
+  "class": "mh-section-wrap",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Ueberschrift", "default": "Newsletter" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Erhalten Sie Wohnideen, Angebote und Neuheiten direkt in Ihr Postfach." },
+    { "type": "text", "id": "placeholder", "label": "Platzhalter", "default": "Ihre E-Mail-Adresse" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Abonnieren" },
+    { "type": "color", "id": "background_color", "label": "Hintergrund", "default": "#efe6da" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1f1a17" }
+  ],
+  "presets": [{ "name": "MH Newsletter" }]
+}
+{% endschema %}

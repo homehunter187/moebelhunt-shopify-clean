@@ -1,0 +1,38 @@
+{{ 'moebelhunt-premium.css' | asset_url | stylesheet_tag }}
+
+<section class="mh-banner mh-section" style="--mh-banner-overlay:{{ section.settings.overlay_opacity | divided_by: 100.0 }};">
+  <div class="page-width">
+    <div class="mh-banner__box mh-banner__box--{{ section.settings.text_position }}">
+      <div class="mh-banner__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', widths: '800, 1200, 1600, 2000', sizes: '100vw', alt: section.settings.heading }}
+        {%- else -%}<div class="mh-banner__ph"></div>{%- endif -%}
+      </div>
+      <div class="mh-banner__content">
+        {%- if section.settings.eyebrow != blank -%}<p class="mh-eyebrow mh-eyebrow--light">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="mh-banner__title">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p class="mh-banner__text">{{ section.settings.text }}</p>{%- endif -%}
+        {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link | default: '#' }}" class="mh-btn mh-btn--light">{{ section.settings.button_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MH Banner",
+  "tag": "section",
+  "class": "mh-section-wrap",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Saison" },
+    { "type": "text", "id": "heading", "label": "Ueberschrift", "default": "Sommermoebel" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Leichte und stilvolle Moebel fuer sonnige Tage." },
+    { "type": "image_picker", "id": "image", "label": "Bild" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Jetzt entdecken" },
+    { "type": "url", "id": "button_link", "label": "Button-Link" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 35 },
+    { "type": "select", "id": "text_position", "label": "Textposition", "default": "left", "options": [ { "value": "left", "label": "Links" }, { "value": "center", "label": "Mitte" }, { "value": "right", "label": "Rechts" } ] }
+  ],
+  "presets": [{ "name": "MH Banner" }]
+}
+{% endschema %}
