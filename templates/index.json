@@ -1,18 +1,34 @@
 {
   "sections": {
-    "premium_hero": { "type": "premium-hero", "settings": {} },
-    "premium_trust": { "type": "premium-trust-bar", "settings": {} },
-    "premium_categories": { "type": "premium-category-grid", "settings": {} },
-    "premium_editorial": { "type": "premium-editorial", "settings": {} },
-    "premium_cta": { "type": "premium-cta", "settings": {} },
-    "premium_footer_content": { "type": "premium-footer-content", "settings": {} }
+    "hero": { "type": "premium-hero", "settings": {} },
+    "trust": { "type": "premium-trust-bar", "settings": {} },
+    "categories": { "type": "premium-category-grid", "settings": {} },
+    "bestseller": { "type": "mh-product-row", "settings": { "eyebrow": "Beliebt", "heading": "Bestseller" } },
+    "summer_banner": { "type": "mh-banner", "settings": { "eyebrow": "Saison", "heading": "Sommermoebel", "text": "Leichte und stilvolle Moebel fuer sonnige Tage." } },
+    "new_collection": { "type": "mh-product-row", "settings": { "eyebrow": "Neu", "heading": "Neue Kollektion" } },
+    "winter_banner": { "type": "mh-banner", "settings": { "eyebrow": "Saison", "heading": "Winterkollektion", "text": "Gemuetliche Einrichtung fuer die kalte Jahreszeit.", "text_position": "right" } },
+    "editorial": { "type": "premium-editorial", "settings": {} },
+    "rooms": { "type": "mh-rooms", "settings": {} },
+    "usp": { "type": "mh-usp", "settings": {} },
+    "testimonials": { "type": "mh-testimonials", "settings": {} },
+    "cta": { "type": "premium-cta", "settings": {} },
+    "newsletter": { "type": "mh-newsletter", "settings": {} },
+    "faq": { "type": "mh-faq", "settings": {} }
   },
   "order": [
-    "premium_hero",
-    "premium_trust",
-    "premium_categories",
-    "premium_editorial",
-    "premium_cta",
-    "premium_footer_content"
+    "hero",
+    "trust",
+    "categories",
+    "bestseller",
+    "summer_banner",
+    "new_collection",
+    "winter_banner",
+    "editorial",
+    "rooms",
+    "usp",
+    "testimonials",
+    "cta",
+    "newsletter",
+    "faq"
   ]
 }
